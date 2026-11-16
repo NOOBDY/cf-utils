@@ -13,11 +13,10 @@
   "scripts": {
     "dev:srt": "pnpm --filter srt dev",
     "dev:wg": "pnpm --filter wg dev",
-
     "build:wg": "pnpm --filter wg build",
-
     "deploy:srt": "pnpm --filter srt deploy",
-
+    "lint": "eslint . --fix",
+    "lint:check": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

@@ -3,5 +3,5 @@ allowBuilds:
   esbuild: true
   workerd: true
 packages:
-  - "apps/*"
-  - "packages/*"
+  - 'apps/*'
+  - 'packages/*'
