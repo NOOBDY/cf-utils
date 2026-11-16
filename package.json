@@ -11,13 +11,26 @@
   "packageManager": "pnpm@12.21.0",
   "type": "module",
   "scripts": {
-    "dev:srt": "pnpm --filter srt dev"
+    "dev:srt": "pnpm --filter srt dev",
+    "dev:wg": "pnpm --filter wg dev",
 
-    "deploy:srt": "pnpm --filter srt deploy"
+    "build:wg": "pnpm --filter wg build",
+
+    "deploy:srt": "pnpm --filter srt deploy",
+
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "eslint": "^10.15.0",
-    "prettier": "^3.10.1",
-    "typescript": "^7.0.2"
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.4.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-svelte": "^3.19.0",
+    "globals": "^17.6.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-svelte": "^4.1.1",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.60.1"
   }
 }
