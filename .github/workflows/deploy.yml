@@ -1,0 +1,78 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      srt: ${{ steps.filter.outputs.srt }}
+      enc: ${{ steps.filter.outputs.enc }}
+      wg: ${{ steps.filter.outputs.wg }}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            srt:
+              - 'apps/srt/**'
+            enc:
+              - 'apps/enc/**'
+            wg:
+              - 'apps/wg/**'
+
+  srt:
+    needs: changes
+    if: ${{ needs.changes.output.srt == 'true' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v3
+        with:
+          working-directory: apps/srt
+          cache: true
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run deploy:srt
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  enc:
+    needs: changes
+    if: ${{ needs.changes.output.enc == 'true' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v3
+        with:
+          working-directory: apps/enc
+          cache: true
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run deploy:enc
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  wg:
+    needs: changes
+    if: ${{ needs.changes.output.wg == 'true' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/setup@v3
+        with:
+          working-directory: apps/wg
+          cache: true
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run deploy:wg
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
