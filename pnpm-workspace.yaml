@@ -1,0 +1,7 @@
+engineStrict: true
+allowBuilds:
+  esbuild: true
+  workerd: true
+packages:
+  - "apps/*"
+  - "packages/*"
