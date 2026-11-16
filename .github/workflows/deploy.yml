@@ -28,7 +28,7 @@ jobs:
 
   srt:
     needs: changes
-    if: ${{ needs.changes.output.srt == 'true' }}
+    if: ${{ needs.changes.outputs.srt == 'true' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -45,7 +45,7 @@ jobs:
 
   enc:
     needs: changes
-    if: ${{ needs.changes.output.enc == 'true' }}
+    if: ${{ needs.changes.outputs.enc == 'true' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -62,7 +62,7 @@ jobs:
 
   wg:
     needs: changes
-    if: ${{ needs.changes.output.wg == 'true' }}
+    if: ${{ needs.changes.outputs.wg == 'true' }}
     runs-on: ubuntu-latest
 
     steps:
