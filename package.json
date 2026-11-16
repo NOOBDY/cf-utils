@@ -1,6 +1,6 @@
 {
   "name": "cf-utils",
-  "license": "ISC",
+  "license": "MIT",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
